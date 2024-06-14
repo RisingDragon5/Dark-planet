@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnuxft0csbnqp"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_1dbsx"]
+[ext_resource type="Texture2D" uid="uid://cv63d1t5k1rlq" path="res://UI/Abg.png" id="2_3oisj"]
+[ext_resource type="Texture2D" uid="uid://dal31jpo53kep" path="res://UI/Start.png" id="2_bj3p7"]
+[ext_resource type="Texture2D" uid="uid://cp2245v36j7xs" path="res://UI/Credits_button.png" id="3_4bir0"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1dbsx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(578, 320)
+scale = Vector2(0.879199, 0.820397)
+texture = ExtResource("2_3oisj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.0
+offset_top = -225.0
+offset_right = 112.0
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.30832, 1.44918)
+alignment = 1
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_bj3p7")
+
+[node name="Credits" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("3_4bir0")
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]

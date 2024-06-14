@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://crwinx1atqmxb"]
+
+[ext_resource type="Texture2D" uid="uid://ckjtebpxthtos" path="res://UI/Credits.png" id="1_vmmfk"]
+[ext_resource type="Script" path="res://Credits.gd" id="2_rjw7n"]
+
+[node name="credits" type="Sprite2D"]
+position = Vector2(577, 332)
+texture = ExtResource("1_vmmfk")
+script = ExtResource("2_rjw7n")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -545.0
+offset_top = -310.0
+offset_right = -500.0
+offset_bottom = -279.0
+scale = Vector2(1.92, 1.48)
+text = "Back
+"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

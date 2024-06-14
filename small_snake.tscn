@@ -1,0 +1,105 @@
+[gd_scene load_steps=18 format=3 uid="uid://0kwlij1c4o52"]
+
+[ext_resource type="Script" path="res://smallSnake.gd" id="1_jsbb1"]
+[ext_resource type="Texture2D" uid="uid://dd1vr2yc8mcdt" path="res://sSnake/smallSnake.0000.png" id="2_cdgxc"]
+[ext_resource type="Texture2D" uid="uid://b3lml1g7j4ipu" path="res://sSnake/smallSnake.0001.png" id="3_0pylj"]
+[ext_resource type="Texture2D" uid="uid://d3ip1fsgtwltr" path="res://sSnake/smallSnake.0002.png" id="4_uxepw"]
+[ext_resource type="Texture2D" uid="uid://vd0ohbmw864s" path="res://sSnake/smallSnake.0003.png" id="5_qlwpo"]
+[ext_resource type="Texture2D" uid="uid://de7mttwiwqh7m" path="res://sSnake/smallSnake.0004.png" id="6_70lt7"]
+[ext_resource type="Texture2D" uid="uid://clwawsiphg1bt" path="res://sSnake/smallSnake.0005.png" id="7_rlk1e"]
+[ext_resource type="Texture2D" uid="uid://du8htmcnxoa5v" path="res://sSnake/smallSnake.0006.png" id="8_hj6kw"]
+[ext_resource type="Texture2D" uid="uid://dibktp2jpwf3t" path="res://sSnake/smallSnake.0007.png" id="9_bxvu7"]
+[ext_resource type="Texture2D" uid="uid://dj1hpikndmdyc" path="res://sSnake/smallSnake.0008.png" id="10_wvf05"]
+[ext_resource type="Texture2D" uid="uid://ckrdwoxl136c6" path="res://sSnake/smallSnake.0009.png" id="11_pkyi6"]
+[ext_resource type="Texture2D" uid="uid://be8ili08wcm4v" path="res://sSnake/smallSnake.0010.png" id="12_exdjl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eavcn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_cdgxc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0pylj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_uxepw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qlwpo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_70lt7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rlk1e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_hj6kw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_bxvu7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_wvf05")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_pkyi6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_exdjl")
+}],
+"loop": false,
+"name": &"smallSnake",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cj1vt"]
+radius = 9.0
+
+[sub_resource type="Gradient" id="Gradient_p327k"]
+colors = PackedColorArray(0.54902, 0, 0.698039, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6c356"]
+gradient = SubResource("Gradient_p327k")
+fill = 1
+fill_from = Vector2(0.502242, 0.502242)
+fill_to = Vector2(0.856502, 0.188341)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hhyev"]
+
+[node name="smallSnake" type="CharacterBody2D" groups=["enemy2"]]
+position = Vector2(369, 210)
+scale = Vector2(0.5, 0.5)
+motion_mode = 1
+script = ExtResource("1_jsbb1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_eavcn")
+animation = &"smallSnake"
+frame = 10
+frame_progress = 1.0
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(18, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_cj1vt")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(25, -3)
+target_position = Vector2(18, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.23352, 0.189197)
+texture = SubResource("GradientTexture2D_6c356")
+
+[node name="Area2D" type="Area2D" parent="." groups=["enemy2"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(16, 2)
+rotation = -1.56997
+shape = SubResource("CapsuleShape2D_hhyev")
+debug_color = Color(0.939028, 0.200841, 0.373939, 0.42)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

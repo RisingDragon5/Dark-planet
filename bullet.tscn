@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://cu25kevtkba66"]
+
+[ext_resource type="Texture2D" uid="uid://bpwasf3t638a0" path="res://Player/Bullet.png" id="1_2e0wx"]
+
+[sub_resource type="GDScript" id="GDScript_dc84m"]
+script/source = "extends Area2D
+func _process(delta):	
+	position.x += 2 * 300 * delta
+func _on_area_entered(area):
+	if area.is_in_group(\"enemy1\") or area.is_in_group(\"enemy2\") or area.is_in_group(\"wall\"):
+		$\"..\".queue_free()
+"
+
+[sub_resource type="Gradient" id="Gradient_k4xl4"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0.392157)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ooo7v"]
+gradient = SubResource("Gradient_k4xl4")
+fill = 1
+fill_from = Vector2(0.831111, 0.493333)
+fill_to = Vector2(0.928889, 0.0266667)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7vh5d"]
+radius = 9.0
+height = 42.0
+
+[node name="bullet" type="Node2D"]
+scale = Vector2(0.730769, 0.634854)
+
+[node name="bulletArea" type="Area2D" parent="." groups=["bullet"]]
+script = SubResource("GDScript_dc84m")
+
+[node name="PointLight2D" type="PointLight2D" parent="bulletArea"]
+position = Vector2(-0.500001, 4.88758e-06)
+scale = Vector2(0.578125, 0.1875)
+texture = SubResource("GradientTexture2D_ooo7v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bulletArea"]
+rotation = -1.52084
+shape = SubResource("CapsuleShape2D_7vh5d")
+
+[node name="Sprite2D" type="Sprite2D" parent="bulletArea"]
+texture = ExtResource("1_2e0wx")
+
+[connection signal="area_entered" from="bulletArea" to="bulletArea" method="_on_area_entered"]

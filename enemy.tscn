@@ -1,0 +1,104 @@
+[gd_scene load_steps=17 format=3 uid="uid://qrh8dh10e05x"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_mb4cu"]
+[ext_resource type="Texture2D" uid="uid://xt8ljbgw4g2l" path="res://darkSnake/Synfig Animation 2.0000.png" id="2_uih8w"]
+[ext_resource type="Texture2D" uid="uid://2lc11k1yd0ji" path="res://darkSnake/Synfig Animation 2.0001.png" id="3_68yfb"]
+[ext_resource type="Texture2D" uid="uid://bglgyg5a3rtar" path="res://darkSnake/Synfig Animation 2.0002.png" id="4_0v2gy"]
+[ext_resource type="Texture2D" uid="uid://cj0d7vqeaei0" path="res://darkSnake/Synfig Animation 2.0003.png" id="5_2y272"]
+[ext_resource type="Texture2D" uid="uid://bvsuqmwa44r2h" path="res://darkSnake/Synfig Animation 2.0004.png" id="6_bkjto"]
+[ext_resource type="Texture2D" uid="uid://ua61jw3rp7va" path="res://darkSnake/Synfig Animation 2.0005.png" id="7_3tv1t"]
+[ext_resource type="Texture2D" uid="uid://bq8svgm4mt71d" path="res://darkSnake/Synfig Animation 2.0006.png" id="8_4u7vm"]
+[ext_resource type="Texture2D" uid="uid://rgaqcjt8faet" path="res://darkSnake/Synfig Animation 2.0007.png" id="9_akq2b"]
+[ext_resource type="Texture2D" uid="uid://dtonsf4om0xkt" path="res://darkSnake/Synfig Animation 2.0008.png" id="10_rq6gv"]
+[ext_resource type="Texture2D" uid="uid://b4lon0mxfyon5" path="res://darkSnake/Synfig Animation 2.0009.png" id="11_sl73r"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1q2r1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_uih8w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_68yfb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0v2gy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2y272")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_bkjto")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3tv1t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_4u7vm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_akq2b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_rq6gv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_sl73r")
+}],
+"loop": false,
+"name": &"darkSnake",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3b5ac"]
+radius = 7.03577
+height = 143.581
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1gjc4"]
+radius = 125.0
+
+[sub_resource type="Gradient" id="Gradient_00jut"]
+colors = PackedColorArray(0.443137, 0, 0.556863, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fdbq3"]
+gradient = SubResource("Gradient_00jut")
+width = 65
+fill = 1
+fill_from = Vector2(0.488789, 0.493274)
+
+[node name="enemy" type="CharacterBody2D" groups=["enemy1"]]
+position = Vector2(465, 293)
+scale = Vector2(0.12, 0.12)
+motion_mode = 1
+script = ExtResource("1_mb4cu")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1q2r1")
+animation = &"darkSnake"
+frame = 9
+frame_progress = 1.0
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(310, -3.8147e-06)
+scale = Vector2(-4.26389, 1.37129)
+shape = SubResource("CapsuleShape2D_3b5ac")
+
+[node name="Area2D" type="Area2D" parent="." groups=["enemy1"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(250, 8.33333)
+shape = SubResource("CircleShape2D_1gjc4")
+debug_color = Color(0.760767, 0.443083, 0.247303, 0.42)
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(325, 8.33333)
+target_position = Vector2(75, -8.3335)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = SubResource("GradientTexture2D_fdbq3")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

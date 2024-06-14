@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://bstfkg4l8iuxr"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_sdgkj"]
+[ext_resource type="Texture2D" uid="uid://yp1wscrhwddx" path="res://Player/Player_graf.png" id="2_jl4gu"]
+[ext_resource type="PackedScene" uid="uid://cu25kevtkba66" path="res://bullet.tscn" id="2_ulgl5"]
+[ext_resource type="AudioStream" uid="uid://nido7s5xy23f" path="res://Audio/alienshoot2.ogg" id="4_wxq0r"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vptol"]
+radius = 115.222
+height = 230.445
+
+[sub_resource type="LabelSettings" id="LabelSettings_vyv1r"]
+font_size = 40
+font_color = Color(1, 0.93458, 0.999342, 1)
+
+[sub_resource type="Gradient" id="Gradient_ta73b"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0.721569)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5wqn5"]
+gradient = SubResource("Gradient_ta73b")
+fill = 1
+fill_from = Vector2(0.511211, 0.488789)
+fill_to = Vector2(0.914798, 0.224215)
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+position = Vector2(166, 344)
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_sdgkj")
+bullet = ExtResource("2_ulgl5")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_jl4gu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.33334, 6.66667)
+rotation = 3.45548
+scale = Vector2(-1.82961, 0.915058)
+shape = SubResource("CapsuleShape2D_vptol")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 96.6666
+offset_top = 36.6666
+offset_right = 119.667
+offset_bottom = 91.6666
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.13335, 1)
+text = "0"
+label_settings = SubResource("LabelSettings_vyv1r")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-20, 23.3334)
+rotation = 0.394923
+scale = Vector2(7.23241, 4.7832)
+texture = SubResource("GradientTexture2D_5wqn5")
+texture_scale = 1.2
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(235, 80)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_wxq0r")
